@@ -83,7 +83,6 @@ class FoodFuzzyLogic:
         rule8 = ctrl.Rule(self.hunger['starving'] & self.time['short'] & self.budget['average'], [self.meal_type['fast food'], self.cuisine['western'], self.price_range['moderate'], self.calories['high'], self.place['street']])
         rule9 = ctrl.Rule(self.hunger['very hungry'] & self.time['short'] & self.health['bulking'], [self.meal_type['fast food'], self.cuisine['vietnamese'], self.price_range['moderate'], self.calories['high'], self.place['street']])
         rule10 = ctrl.Rule(self.hunger['starving'] & self.time['short'] & self.health['bulking'], [self.meal_type['fast food'], self.cuisine['vietnamese'], self.price_range['moderate'], self.calories['high'], self.place['street']])
-
         #Weather(rainy/cold) | Weather(hot)
         rule11 = ctrl.Rule(self.weather['rainy'], [self.meal_type['full meal'], self.cuisine['vietnamese'], self.place['restaurant'], self.calories['high'], self.price_range['expensive']])
         rule12 = ctrl.Rule(self.weather['cold'], [self.meal_type['full meal'], self.cuisine['chinese'], self.place['restaurant'], self.calories['high'], self.price_range['expensive']])
@@ -93,10 +92,9 @@ class FoodFuzzyLogic:
         rule16 = ctrl.Rule(self.weather['rainy'] & self.hunger['hungry'], [self.meal_type['full meal'], self.cuisine['korean'], self.place['restaurant'], self.calories['high'], self.price_range['moderate']])
         rule17 = ctrl.Rule(self.weather['cold'] & self.hunger['hungry'], [self.meal_type['full meal'], self.cuisine['chinese'], self.place['restaurant'], self.calories['high'], self.price_range['moderate']])
         rule18 = ctrl.Rule(self.weather['rainy'] & self.time['short'], [self.meal_type['fast food'], self.cuisine['western'], self.place['restaurant'], self.calories['medium'], self.price_range['moderate']])
-        rule19 = ctrl.Rule(self.weather['hot'] & self.hunger['hungry'], [self.meal_type['full meal'], self.cuisine['thai'], self.place['restaurant'], self.calories['medium'], self.price_range['moderate']])
+        rule19 = ctrl.Rule(self.weather['hot'] & self.hunger['hungry'], [self.meal_type['full meal'], self.cuisine['japanese'], self.place['restaurant'], self.calories['medium'], self.price_range['moderate']])
         rule20 = ctrl.Rule(self.weather['hot'] & self.health['balanced'], [self.meal_type['full meal'], self.cuisine['temple meal'], self.place['restaurant'], self.calories['low'], self.price_range['moderate']])
-        rule21 = ctrl.Rule(self.weather['normal'] & self.time['long'] & self.budget['expensive'], [self.meal_type['full meal'], self.cuisine['italian'], self.place['restaurant'], self.price_range['expensive']])
-
+        rule21 = ctrl.Rule(self.weather['normal'] & self.time['long'] & self.budget['expensive'], [self.meal_type['full meal'], self.cuisine['italian'], self.place['restaurant'],self.calories['medium'], self.price_range['expensive']])
         #Health(diet)
         rule22 = ctrl.Rule(self.health['diet'], [self.meal_type['healthy meal'], self.cuisine['temple meal'], self.calories['low'], self.price_range['cheap'], self.place['restaurant']])
         rule23 = ctrl.Rule(self.health['diet'] & self.budget['expensive'], [self.meal_type['healthy meal'], self.cuisine['japanese'], self.calories['low'], self.price_range['expensive'], self.place['restaurant']])
@@ -107,7 +105,6 @@ class FoodFuzzyLogic:
         rule28 = ctrl.Rule(self.health['diet'] & self.budget['average'], [self.meal_type['healthy meal'], self.cuisine['japanese'], self.calories['low'], self.price_range['moderate'], self.place['restaurant']])
         rule29 = ctrl.Rule(self.health['diet'] & self.weather['cold'], [self.meal_type['healthy meal'], self.cuisine['vietnamese'], self.calories['low'], self.price_range['moderate'], self.place['restaurant']])
         rule30 = ctrl.Rule(self.health['diet'] & self.budget['cheap'], [self.meal_type['healthy meal'], self.cuisine['vietnamese'], self.calories['low'], self.price_range['cheap'], self.place['street']])        
-
         #Budget(expensive) + Time(long)
         rule31 = ctrl.Rule(self.budget['expensive'] & self.time['long'], [self.meal_type['full meal'], self.cuisine['italian'], self.place['restaurant'], self.price_range['expensive'], self.calories['medium']])
         rule32 = ctrl.Rule(self.budget['expensive'] & self.time['long'] & self.weather['cold'], [self.meal_type['full meal'], self.cuisine['chinese'], self.place['restaurant'], self.price_range['expensive'], self.calories['high']])
@@ -119,7 +116,6 @@ class FoodFuzzyLogic:
         rule38 = ctrl.Rule(self.budget['expensive'] & self.weather['hot'], [self.meal_type['healthy meal'], self.cuisine['japanese'], self.place['restaurant'], self.price_range['expensive'], self.calories['low']])
         rule39 = ctrl.Rule(self.budget['expensive'] & self.hunger['light'], [self.meal_type['snack'], self.cuisine['dessert'], self.place['restaurant'], self.price_range['expensive'], self.calories['medium']])
         rule40 = ctrl.Rule(self.budget['expensive'] & self.health['balanced'], [self.meal_type['full meal'], self.cuisine['japanese'], self.place['restaurant'], self.price_range['expensive'], self.calories['medium']])
-
         #Hunger(light) + Time(medium/long)
         rule41 = ctrl.Rule(self.hunger['light'] & self.time['medium'], [self.meal_type['snack'], self.cuisine['drinks'], self.place['street'], self.price_range['cheap'], self.calories['low']])
         rule42 = ctrl.Rule(self.hunger['light'] & self.time['long'], [self.meal_type['snack'], self.cuisine['dessert'], self.place['restaurant'], self.price_range['moderate'], self.calories['medium']])
@@ -131,13 +127,37 @@ class FoodFuzzyLogic:
         rule48 = ctrl.Rule(self.hunger['light'] & self.weather['cold'], [self.meal_type['snack'], self.cuisine['drinks'], self.place['restaurant'], self.price_range['moderate'], self.calories['low']])
         rule49 = ctrl.Rule(self.hunger['light'] & self.time['medium'] & self.weather['hot'], [self.meal_type['snack'], self.cuisine['drinks'], self.place['street'], self.price_range['cheap'], self.calories['low']])
         rule50 = ctrl.Rule(self.hunger['light'] & self.time['long'] & self.budget['expensive'], [self.meal_type['snack'], self.cuisine['dessert'], self.place['restaurant'], self.price_range['expensive'], self.calories['medium']])
+        #Budget(cheap) + Hunger(hungry/very hungry)
+        rule51 = ctrl.Rule(self.budget['cheap'] & self.hunger['hungry'], [self.meal_type['full meal'], self.cuisine['vietnamese'], self.place['street'], self.price_range['cheap'], self.calories['medium']])
+        rule52 = ctrl.Rule(self.budget['cheap'] & self.hunger['very hungry'], [self.meal_type['full meal'], self.cuisine['chinese'], self.place['street'], self.price_range['cheap'], self.calories['high']])
+        rule53 = ctrl.Rule(self.budget['cheap'] & self.weather['cold'], [self.meal_type['full meal'], self.cuisine['vietnamese'], self.place['street'], self.price_range['cheap'], self.calories['high']])
+        rule54 = ctrl.Rule(self.budget['cheap'] & self.time['very short'], [self.meal_type['fast food'], self.cuisine['vietnamese'], self.place['street'], self.price_range['cheap'], self.calories['medium']])
+        rule55 = ctrl.Rule(self.budget['cheap'] & self.health['balanced'], [self.meal_type['healthy meal'], self.cuisine['temple meal'], self.place['street'], self.price_range['cheap'], self.calories['low']])
+        # Health(bulking) + Hunger
+        rule56 = ctrl.Rule(self.health['bulking'] & self.hunger['starving'], [self.meal_type['full meal'], self.cuisine['western'], self.calories['high'], self.place['restaurant'], self.price_range['expensive']])
+        rule57 = ctrl.Rule(self.health['bulking'] & self.weather['cold'], [self.meal_type['full meal'], self.cuisine['korean'], self.calories['high'], self.place['restaurant'], self.price_range['moderate']])
+        rule58 = ctrl.Rule(self.health['bulking'] & self.budget['average'], [self.meal_type['full meal'], self.cuisine['chinese'], self.calories['high'], self.place['restaurant'], self.price_range['moderate']])
+        rule59 = ctrl.Rule(self.health['bulking'] & self.time['short'], [self.meal_type['fast food'], self.cuisine['western'], self.calories['high'], self.place['street'], self.price_range['cheap']])
+        rule60 = ctrl.Rule(self.health['bulking'] & self.weather['hot'], [self.meal_type['full meal'], self.cuisine['japanese'], self.calories['medium'], self.place['restaurant'], self.price_range['expensive']])
+        # Time(very short) + các điều kiện khác
+        rule61 = ctrl.Rule(self.time['very short'] & self.weather['rainy'], [self.meal_type['fast food'], self.cuisine['western'], self.place['street'], self.calories['high'], self.price_range['cheap']])
+        rule62 = ctrl.Rule(self.time['very short'] & self.health['diet'], [self.meal_type['snack'], self.cuisine['drinks'], self.place['street'], self.calories['low'], self.price_range['cheap']])
+        rule63 = ctrl.Rule(self.time['very short'] & self.budget['expensive'], [self.meal_type['fast food'], self.cuisine['western'], self.place['restaurant'],self.calories['high'], self.price_range['expensive']])
+        rule64 = ctrl.Rule(self.time['very short'] & self.hunger['light'], [self.meal_type['snack'], self.cuisine['vietnamese'], self.place['street'], self.calories['low'], self.price_range['cheap']])
+        # Weather(rainy) + Budget
+        rule65 = ctrl.Rule(self.weather['rainy'] & self.time['medium'], [self.meal_type['full meal'], self.cuisine['korean'], self.place['restaurant'],self.calories['high'],  self.price_range['moderate']])
+        rule66 = ctrl.Rule(self.weather['rainy'] & self.budget['expensive'], [self.meal_type['full meal'], self.cuisine['chinese'], self.place['restaurant'], self.price_range['expensive'], self.calories['high']])
+        rule67 = ctrl.Rule(self.hunger['starving'] & self.health['diet'], [self.meal_type['healthy meal'], self.cuisine['temple meal'], self.calories['low'], self.place['restaurant'],self.price_range['moderate']])
+        rule68 = ctrl.Rule(self.time['long'] & self.budget['cheap'], [self.meal_type['snack'], self.cuisine['drinks'], self.place['street'],  self.calories['low'], self.price_range['cheap']]) 
 
         self.sim_ctrl = ctrl.ControlSystem([
             rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10,
             rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19, rule20,
             rule21, rule22, rule23, rule24, rule25, rule26, rule27, rule28, rule29, rule30,
             rule31, rule32, rule33, rule34, rule35, rule36, rule37, rule38, rule39, rule40,
-            rule41, rule42, rule43, rule44, rule45, rule46, rule47, rule48, rule49, rule50
+            rule41, rule42, rule43, rule44, rule45, rule46, rule47, rule48, rule49, rule50,
+            rule51, rule52, rule53, rule54, rule55, rule56, rule57, rule58, rule59, rule60,
+            rule61, rule62, rule63, rule64, rule65, rule66, rule67, rule68
         ])
         self.sim = ctrl.ControlSystemSimulation(self.sim_ctrl)
 
