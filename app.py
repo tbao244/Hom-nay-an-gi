@@ -92,10 +92,7 @@ def show_results_dialog(inputs, weather_score):
         candidates = st.session_state.api_service.get_restaurants_by_cuisine(res['cuisine_label'])
         ranked_restaurants = st.session_state.api_service.re_rank_by_taste(candidates)
         st.session_state.final_restaurants = ranked_restaurants
-        if ranked_restaurants:
-            top_choice = ranked_restaurants[0]
-            st.success(f"Gợi ý dựa theo gu của bạn: **{top_choice['name']}**")
-
+        
         current_search = {
             "cuisine": res['cuisine_label'],
             "budget": f"{res['price_label']}",
@@ -115,6 +112,9 @@ def show_results_dialog(inputs, weather_score):
             st.metric(f"💰 **Tầm giá**", res['price_label'])
             st.write(f"📍 **Địa điểm:** {res['place_label']}")
         st.write("---")
+        if ranked_restaurants:
+            top_choice = ranked_restaurants[0]
+            st.success(f"Gợi ý dựa theo gu của bạn: **{top_choice['name']}**")
         if st.button("Xem bản đồ", use_container_width=True):
             st.session_state.results = res
             st.rerun()
