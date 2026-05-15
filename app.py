@@ -335,16 +335,21 @@ else:
                     height=460
                 )
 
-                delivery_time = api.get_delivery_estimation(curr_lat, curr_lng, target_shop['latitude'], target_shop['longitude'])
-                if delivery_time <= 20:
-                    status_text = "Nhanh"
-                    st.success(f"Thời gian giao hàng ước tính: **{delivery_time} phút** ({status_text})")
-                elif delivery_time <= 30:
-                    status_text = "Vừa"
-                    st.warning(f"Thời gian giao hàng ước tính: **{delivery_time} phút** ({status_text})")
+                travel_time = api.get_delivery_estimation(curr_lat, curr_lng, target_shop['latitude'], target_shop['longitude'])
+                if res['place_label'] == "Vỉa hè":
+                    prep_min, prep_max = 5, 8
+                elif res['place_label'] == "Nhà hàng":
+                    prep_min, prep_max = 8, 15
                 else:
-                    status_text = "Chậm"
-                    st.error(f"Thời gian giao hàng ước tính: **{delivery_time} phút** ({status_text})")
+                    prep_min, prep_max = 6, 10
+                total_min = travel_time + prep_min
+                total_max = travel_time + prep_max
+                if total_max <= 20:
+                    st.success(f"Giao hàng nhanh: **{total_min} - {total_max} phút**")
+                elif total_max <= 30:
+                    st.warning(f"Giao hàng vừa: **{total_min} - {total_max} phút**")
+                else:
+                    st.error(f"Giao hàng chậm: **{total_min} - {total_max} phút**")
 
                 if st.button(f"Xác nhận dùng bữa tại {target_shop['name']}", use_container_width=True):
                     api.learn_user_taste(target_shop['name'])
