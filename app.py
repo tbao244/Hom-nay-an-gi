@@ -336,7 +336,15 @@ else:
                 )
 
                 delivery_time = api.get_delivery_estimation(curr_lat, curr_lng, target_shop['latitude'], target_shop['longitude'])
-                st.info(f"Thời gian di chuyển ước tính: **{delivery_time} phút**")
+                if delivery_time <= 20:
+                    status_text = "Nhanh"
+                    st.success(f"Thời gian giao hàng ước tính: **{delivery_time} phút** ({status_text})")
+                elif delivery_time <= 30:
+                    status_text = "Vừa"
+                    st.warning(f"Thời gian giao hàng ước tính: **{delivery_time} phút** ({status_text})")
+                else:
+                    status_text = "Chậm"
+                    st.error(f"Thời gian giao hàng ước tính: **{delivery_time} phút** ({status_text})")
 
                 if st.button(f"Xác nhận dùng bữa tại {target_shop['name']}", use_container_width=True):
                     api.learn_user_taste(target_shop['name'])
